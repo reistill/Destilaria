@@ -6,7 +6,7 @@ from destilaria import nome_entry, email_entry
 conexao = mysql.connector.connect(
     host = "localhost",
     user = "root",
-    password = "2006@Qwerty",
+    password = "2006@Qwerty130469",
     database = "destilaria")
 cursor = conexao.cursor()
 
@@ -24,13 +24,11 @@ def ver_clientes():
     return print(listagem2)
 
 def cadastrar():
-    nomecad = input("Digite seu nome:")
-    email = input("Digite seu email:")
-    cadastro = f"INSERT INTO Cliente(nome, email) VALUES ('{nomecad}', '{email}')"
-    cursor.execute(cadastro)
-    cursor.commit()
-
-def obter():
     nome = nome_entry.get()
     email = email_entry.get()
+    
     print(f"Usuário {nome} do respectivo email: {email} cadastrado!")
+
+    cadastro = f"INSERT INTO Cliente(nome_cliente, email) VALUES ('{nome}', '{email}')"
+    cursor.execute(cadastro)
+    cursor.commit()

@@ -4,13 +4,13 @@ from destilaria_func import *
 conexao = mysql.connector.connect(
     host = "localhost",
     user = "root",                                          
-    password = "2006@Qwerty",
+    password = "2006@Qwerty130469",
     database = "destilaria")
 cursor = conexao.cursor()
 
 janela = Tk()
 janela.title('Sistema da Destilaria')
-janela.geometry("600x200")
+janela.geometry("600x400")
 #Componentes da interface de cadastro
 ttk.Label(janela, text='Nome:').grid(row=0, column=0, padx=5, pady=5)
 ttk.Label(janela, text='Email:').grid(row=1, column=0, padx=5, pady=5)
@@ -39,21 +39,19 @@ def ver_clientes():
     return print(listagem2)
 
 def cadastrar():
-    nomecad = input("Digite seu nome:")
-    email = input("Digite seu email:")
-    cadastro = f"INSERT INTO Cliente(nome, email) VALUES ('{nomecad}', '{email}')"
-    cursor.execute(cadastro)
-    cursor.commit()
-
-def obter():
     nome = nome_entry.get()
     email = email_entry.get()
+
     print(f"Usuário {nome} do respectivo email: {email} cadastrado!")
 
+    cadastro = f"INSERT INTO Cliente(nome_cliente, email) VALUES ('{nome}', '{email}')"
+    cursor.execute(cadastro)
+    cursor.commit()
+    
 #Botões da interface
 ttk.Button(janela, command=ver_produtos, text="Ver produtos").grid(row=0, column=3, padx=5, pady=5)
 ttk.Button(janela, command=ver_clientes, text="Ver clientes").grid(row=1, column=3, padx=5, pady=5)
-ttk.Button(janela, command=obter, text="Cadastrar cliente").grid(row=2, column=3, padx=5, pady=5)
+ttk.Button(janela, command=cadastrar, text="Cadastrar cliente").grid(row=2, column=3, padx=5, pady=5)
 
 janela.mainloop()
 
