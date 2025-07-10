@@ -23,12 +23,24 @@ def ver_clientes():
     listagem2 = cursor.fetchall()
     return print(listagem2)
 
-def cadastrar():
+def cadastrar_cliente():
     nome = nome_entry.get()
     email = email_entry.get()
     
     print(f"Usuário {nome} do respectivo email: {email} cadastrado!")
 
-    cadastro = f"INSERT INTO Cliente(nome_cliente, email) VALUES ('{nome}', '{email}')"
-    cursor.execute(cadastro)
-    cursor.commit()
+    comando = "INSERT INTO Cliente(nome_cliente, email) VALUES (%s, %s)"
+    valor = (nome, email)
+    cursor.execute(comando, valor)
+    conexao.commit()
+
+def excluir_cliente():
+    nome = nome_entry.get()
+    email = email_entry.get()
+
+    print(f"Usuário {nome} do respectivo email: {email} excluído!")
+
+    comando = "DELETE FROM Cliente WHERE nome_cliente = %s AND email = %s"
+    valor = (nome, email)
+    cursor.execute(comando, valor)
+    conexao.commit()
